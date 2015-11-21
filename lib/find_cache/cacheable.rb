@@ -19,7 +19,7 @@ module FindCache
       #   # For User model with user_id ForeignKey in UserDetail model
       #   find_cache_has_one :user_detail, UserDetail, :user_id
       def find_cache_has_one(attribute, model, foreign_key)
-        send :define_method, attribute.to_sym do |*args|
+        send :define_method, attribute.to_sym do
           model.find_cache_by_ref(foreign_key, self.send(self.class.primary_key.to_sym))
         end
       end
@@ -37,7 +37,7 @@ module FindCache
       #   # In UserDetail model with user_id ForeignKey of User model
       #   find_cache_belongs_to :user, User, :user_id
       def find_cache_belongs_to(attribute, model, foreign_key)
-        send :define_method, attribute.to_sym do |*args|
+        send :define_method, attribute.to_sym do
           model.find_cache(self.send(foreign_key.to_sym))
         end
       end
