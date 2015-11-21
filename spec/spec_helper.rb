@@ -5,7 +5,9 @@ require 'active_record'
 require 'factory_girl'
 require 'database_cleaner'
 require 'rails_helper'
+require 'codeclimate-test-reporter'
 Dir[File.join(FILE_ROOT, "spec/support/*.rb")].each {|f| require f }
 Dir[File.join(FILE_ROOT, "spec/factories/*.rb")].each {|f| require f }
 
 ActiveRecord::Migrator.up('spec/db/migrate')
+CodeClimate::TestReporter.start
