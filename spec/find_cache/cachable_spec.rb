@@ -91,10 +91,11 @@ describe FindCache::Cacheable do
 
   describe '#reload' do
     it 'clears cache on reload' do
-      expect(FindCacheTest::User.find_cache(user.id).posts_count).to eq 5
-      FindCacheTest::User.find_cache(user.id).posts.last.destroy
+      FindCacheTest::User.find_cache(user.id)
+      cache_key = FindCache::KeyGen.cache_key("FindCacheTest::User", user.id)
+      expect($find_cache_store[FindCache::KeyGen.global_cache_key].has_key?(cache_key)).to eq true
       user.reload
-      expect(FindCacheTest::User.find_cache(user.id).posts_count).to eq 4
+      expect($find_cache_store[FindCache::KeyGen.global_cache_key].has_key?(cache_key)).to eq false      
     end
   end
 end
