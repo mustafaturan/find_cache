@@ -59,7 +59,7 @@ module FindCache
     private
     #nodoc
     def self.generate_uuid_and_init_cache_hash
-      uuid = SecureRandom.uuid.gsub('-', '')
+      uuid = SecureRandom.uuid.delete('-')
       $find_cache_store[uuid] = {}
       uuid
     end
