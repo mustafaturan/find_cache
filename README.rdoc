@@ -1,6 +1,7 @@
 == FindCache
 {<img src="https://codeclimate.com/github/mustafaturan/find_cache/badges/gpa.svg" />}[https://codeclimate.com/github/mustafaturan/find_cache]
 {<img src="https://codeclimate.com/github/mustafaturan/find_cache/badges/issue_count.svg" />}[https://codeclimate.com/github/mustafaturan/find_cache]
+{<img src="https://travis-ci.org/mustafaturan/find_cache.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/mustafaturan/find_cache]
 
 It is simply a thread-safe ActiveRecord object caching gem using Rails.cache methods.
 
