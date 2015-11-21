@@ -1,0 +1,66 @@
+== FindCache
+
+It is simply a thread-safe ActiveRecord object caching gem using Rails.cache methods.
+
+It makes "ActiveRecord 'find_by_id, find_by_(attr)' methods and 'has_one, belongs_to' relations" cacheable by PrimaryKey(PK) or any referenced columns using Rails.cache methods. It also supports fetching multiple records using PKs(ids) with find_all_cache method(if cache store supports multiple reads [hint: memcached_store, dalli_store supports.]).
+
+== Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'find_cache'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install find_cache
+
+== For has_one and belongs_to relations
+
+### Sample Models:
+
+    class User < ActiveRecord::Base
+      has_one :user_detail
+  
+      # to enable has_one caching
+      find_cache_has_one :user_detail, UserDetail, :user_id 
+    end
+
+    class UserDetail < ActiveRecord::Base
+      belongs_to :user
+  
+      # to enable belongs_to caching
+      find_cache_belongs_to :user, User, :user_id 
+    end
+
+== For finding a record
+
+    user = User.find_cache(id) # fetches from cache
+    user.user_detail
+    # fetches from cache if the User model has
+    # 'find_cache_has_one :user_detail, UserDetail, :user_id'
+
+    user = User.find_by_id(id) # fetches from DB
+    user.user_detail # fetches from DB
+
+== For fetching multiple ids
+
+    users = User.find_all_cache([1,2,3,4,5])
+    users_ordered_desc = User.find_all_cache([4,5,1,2,3], 'id DESC')
+    users_ordered_asc = User.find_all_cache([4,5,1,2,3], 'id ASC')
+
+== For fetching a record by attribute
+
+    user_detail = UserDetail.find_by_user_id(1) # from db
+    user_detail = UserDetail.find_cache_by_ref(:user_id, 1) # from cache store
+
+== Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request

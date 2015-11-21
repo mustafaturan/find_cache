@@ -1,0 +1,39 @@
+== CHANGE LOG
+== version 0.3.0
+# moved unit test to rspec tests
+# auto handling counter_cache
+# auto expires cache on reload
+# controller based garbage collector added for find_cache data
+
+== version 0.2.1
+# fixed expire_find_cache bug (which occured in v0.2.0)
+
+== version 0.2.0
+# find_by_id and find_all_by_id methods converted to where queries for rails 4
+# id based queries replaced with primary_key based queries
+
+== version 0.1.8
+# local memorization on dynamic methods removed to prevent duplicate caching
+
+== version 0.1.7
+# code cleanup and documentation
+
+== version 0.1.6
+# after_commit on: :create, :update, :save instead of after_create, after_update, after_save callbacks
+# fix thread cache key for dynamic class methods
+
+== version 0.1.5
+# naming fix
+
+== version 0.1.4
+# cache key bug fix
+
+== version 0.1.3
+# dependency updates to make it usable for all activerecord >3.0.0
+
+== version 0.1.0 
+# 2012-08-25 Go public
+# 2012-08-24 Added some tests
+# 2012-08-23 Added thread safe cache method KeyGen.global_cache_key
+
+== version 0.0.1 (private)
